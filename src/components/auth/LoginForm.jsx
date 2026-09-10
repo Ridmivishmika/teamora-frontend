@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { loginUser } from "@/lib/api";
 
 export default function LoginForm() {
@@ -53,7 +54,7 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {error && (
-        <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md">
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-md">
           {error}
         </div>
       )}
@@ -74,9 +75,10 @@ export default function LoginForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Password
-        </label>
+        <div className="mb-1 flex items-center justify-between">
+          <label className="block text-sm font-medium text-gray-700">Password</label>
+          <Link href="/forgot-password" className="text-xs font-medium text-orange-700 hover:text-orange-800 hover:underline">Forgot password?</Link>
+        </div>
         <input
           type="password"
           name="password"

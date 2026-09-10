@@ -1,5 +1,4 @@
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
 // ========== Helper ==========
 function getAuthHeaders() {
   const token = localStorage.getItem("token");
@@ -44,6 +43,29 @@ export async function loginUser(data) {
   }
 
   return result;
+}
+
+export async function requestPasswordReset(email) {
+  const res = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Unable to request a password reset");
+  return result;
+}
+
+export async function resetPassword(token, password) {
+  const res = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, password }),
+  });
+  if (!res.ok) {
+    const result = await res.json().catch(() => ({}));
+    throw new Error(result.error || "Unable to reset password");
+  }
 }
 
 // ========== REPORTS ==========
