@@ -40,7 +40,7 @@ export default function LoginForm() {
 
       // Redirect based on role
       if (data.role === "MANAGER" || data.role === "ADMIN") {
-        router.push("/summary");
+        router.push("/teamdashboard");
       } else {
         router.push("/weeklyreport");
       }

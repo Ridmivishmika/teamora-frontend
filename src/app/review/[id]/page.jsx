@@ -90,7 +90,7 @@ export default function ReportReviewPage() {
         <div className="flex items-start justify-between mb-6">
           <div>
             <button
-              onClick={() => router.push("/summary")}
+              onClick={() => router.push("/teamdashboard")}
               className="text-sm text-gray-500 hover:text-gray-800 mb-2"
             >
               ← Dashboard
